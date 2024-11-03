@@ -11,46 +11,48 @@
 
 (function() {
     'use strict';
+    // The message matching the language setting on Bluesky is used. If it's not one of these, English is used as a fallback.
     const TL = {
+        // by Tanza3D
         en: "Are you sure you want to block {handle} ({did})? You will have to refresh the page to reflect this change.",
-        // Machine-translated; please verify
-        ca: "Estàs cert que vols bloquejar {handle} ({did})? Haureu d'actualitzar la pàgina per reflectir aquest canvi.",
+        // Machine-translated
+        //ca: "Estàs cert que vols bloquejar {handle} ({did})? Haureu d'actualitzar la pàgina per reflectir aquest canvi.",
         // official translation uses du/deine
-        // Machine-translated; please verify
-        de: "Bist du sicher, dass du {handle} ({did}) blockieren willst? Du musst die Seite aktualisieren, um diese Änderung zu berücksichtigen.",
-        // official translation uses tuteo
+        // Machine-translated
+        //de: "Bist du sicher, dass du {handle} ({did}) blockieren willst? Du musst die Seite aktualisieren, um diese Änderung zu berücksichtigen.",
+        // by HaleyHalcyon
         es: "¿Estás cierto de que quieres bloquear a {handle} ({did})? Tendrás que actualizar la página para reflejar este cambio.",
-        // Machine-translated; please verify
-        fi: "Halautko varmasti estää {handle} ({did})? Sinun on päivitettävä sivu, jotta tämä muutos näkyy.",
+        // Machine-translated
+        //fi: "Halautko varmasti estää {handle} ({did})? Sinun on päivitettävä sivu, jotta tämä muutos näkyy.",
         // official translation uses vouvoyer
-        // Machine-translated; please verify
-        fr: "Êtes-vous sûr de vouloir bloquer {handle} ({did})\u202F? Vous devrez actualiser la page pour refléter ce changement.",
-        // I know nothing about Irish Gaelic
-        // Machine-translated; please verify
-        ga: "An bhfuil tú cinnte gur mhaith leat {handle} ({did}) a bhlocáil? Beidh ort an leathanach a athnuachan chun an t-athrú seo a léiriú.",
-        // Machine-translated; please verify
-        hi: "क्या आप वाकई {handle} ({did}) को ब्लॉक करना चाहते हैं? इस परिवर्तन को दर्शाने के लिए आपको पृष्ठ को ताज़ा करना होगा।",
-        // Machine-translated; please verify
-        id: "Apakah Anda yakin ingin memblokir {handle} ({did})? Anda perlu menyegarkan halaman untuk mencerminkan perubahan ini.",
-        // Machine-translated; please verify
-        it: "Sei sicuro di voler bloccare {handle} ({did})? Sarà necessario aggiornare la pagina per riflettere questa modifica.",
+        // Machine-translated
+        //fr: "Êtes-vous sûr de vouloir bloquer {handle} ({did})\u202F? Vous devrez actualiser la page pour refléter ce changement.",
+        // Machine-translated
+        //ga: "An bhfuil tú cinnte gur mhaith leat {handle} ({did}) a bhlocáil? Beidh ort an leathanach a athnuachan chun an t-athrú seo a léiriú.",
+        // Machine-translated
+        //hi: "क्या आप वाकई {handle} ({did}) को ब्लॉक करना चाहते हैं? इस परिवर्तन को दर्शाने के लिए आपको पृष्ठ को ताज़ा करना होगा।",
+        // Machine-translated
+        //id: "Apakah Anda yakin ingin memblokir {handle} ({did})? Anda perlu menyegarkan halaman untuk mencerminkan perubahan ini.",
+        // Machine-translated
+        //it: "Sei sicuro di voler bloccare {handle} ({did})? Sarà necessario aggiornare la pagina per riflettere questa modifica.",
+        // by HaleyHalcyon
         ja: "本当に{handle}（{did}）をブロックしますか？ 反映させるにはページを再読み込みする必要があります。",
-        // Machine-translated; please verify
-        ko: "정말 {handle} ({did})을 차단하시겠습니까? 반영하려면 페이지를 다시 로드해야 합니다.",
-        // Machine-translated; please verify
-        'pt-BR': "Tem certeza de deseja bloquear {handle} ({did})? Você precisará atualizar a página para refletir esta alteração.",
-        // Machine-translated; please verify
-        ru: "Вы уверены, что хотите заблокировать {handle} ({did})? Вам нужно будет обновить страницу, чтобы отразить это изменение.",
-        // Machine-translated; please verify
-        tr: "{handle} ({did})'ı engellemek istediğinizden emin misiniz? Bu değişikliğin yansıtılması için sayfayı yenilemeniz gerekecektir.",
-        // Machine-translated; please verify
-        uk: "Ви впевнені, що бажаєте заблокувати {handle} ({did})? Вам потрібно буде оновити сторінку, щоб відобразити цю зміну.",
-        // Machine-translated; please verify
-        "zh-CN": "您确定要阻止 {handle} ({did}) 吗？您将需要刷新页面以反映此更改。",
-        // Machine-translated; please verify
-        "zh-TW": "您確定要封鎖 {handle} ({did}) 嗎？您將需要刷新頁面以反映此更改。",
-        // Machine-translated; please verify
-        "zh-HK": "你確定要阻止{handle}（{did}）嗎？ 您需要重新加載頁面才能使其生效。",
+        // Machine-translated
+        //ko: "정말 {handle} ({did})을 차단하시겠습니까? 반영하려면 페이지를 다시 로드해야 합니다.",
+        // Machine-translated
+        //'pt-BR': "Tem certeza de deseja bloquear {handle} ({did})? Você precisará atualizar a página para refletir esta alteração.",
+        // by Tanza3D
+        ru: "Вы уверены, что хотите заблокировать {handle} ({did})? Вам нужно будет обновить страницу, чтобы увидеть изменения.",
+        // Machine-translated
+        //tr: "{handle} ({did})'ı engellemek istediğinizden emin misiniz? Bu değişikliğin yansıtılması için sayfayı yenilemeniz gerekecektir.",
+        // Machine-translated
+        //uk: "Ви впевнені, що бажаєте заблокувати {handle} ({did})? Вам потрібно буде оновити сторінку, щоб відобразити цю зміну.",
+        // Machine-translated
+        //"zh-CN": "您确定要阻止 {handle} ({did}) 吗？您将需要刷新页面以反映此更改。",
+        // Machine-translated
+        //"zh-TW": "您確定要封鎖 {handle} ({did}) 嗎？您將需要刷新頁面以反映此更改。",
+        // Machine-translated
+        //"zh-HK": "你確定要阻止{handle}（{did}）嗎？ 您需要重新加載頁面才能使其生效。",
     }
 
     (function() {
