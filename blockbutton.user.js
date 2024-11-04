@@ -11,6 +11,7 @@
 
 (function() {
     'use strict';
+    // Put language codes here if there are multiple locales under the same language code. (Currently only for "zh")
     const HAS_REGION = ["zh"];
     // The message matching the language setting on Bluesky is used. If it's not one of these, English is used as a fallback.
     const TL = {
@@ -58,6 +59,33 @@
         // Machine-translated
         //"zh-HK": "你確定要阻止{handle}（{did}）嗎？ 您需要重新加載頁面才能使其生效。",
     };
+    const TLButton = {
+        // by Tanza3D
+        en: "Block user",
+        //ca: "",
+        //de: "",
+        // by HaleyHalcyon
+        es: "Bloquear a usuario",
+        //fi: "",
+        //fr: "",
+        //ga: "",
+        //hi: "",
+        //id: "",
+        //it: "",
+        // by HaleyHalcyon
+        ja: "ユーザーをブロックする",
+        // Machine-translated
+        //ko: "",
+        // by HaleyHalcyon
+        nl: "Gebruiker blokkeren",
+        //'pt-BR': "",
+        //ru: "",
+        //tr: "",
+        //uk: "",
+        //"zh-CN": "",
+        //"zh-TW": "",
+        //"zh-HK": "",
+    };
 
     function getLocale() {
         const langCheck = (lang) => {
@@ -73,7 +101,7 @@
             }
             return "";
         }
-        
+
         const browserLangList = navigator.languages;
         for (let lang of browserLangList) {
             const check = langCheck(lang);
@@ -102,7 +130,8 @@
                         var buttonToClone = list.querySelector('[data-testid="postDropdownMuteWordsBtn"');
                         var button = buttonToClone.cloneNode(true)
                         list.appendChild(button);
-                        button.querySelector(".css-146c3p1").innerText = "Block User";
+                        let locale = getLocale();
+                        button.querySelector(".css-146c3p1").innerText = TLButton[locale];
                         list.insertBefore(button, buttonToClone);
 
                         var postItem = menu.closest('[data-testid^="feedItem-by-"]');
