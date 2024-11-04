@@ -11,6 +11,7 @@
 
 (function() {
     'use strict';
+    const HAS_REGION = ["zh"];
     // The message matching the language setting on Bluesky is used. If it's not one of these, English is used as a fallback.
     const TL = {
         // by Tanza3D
@@ -39,6 +40,9 @@
         ja: "本当に{handle}（{did}）をブロックしますか？ 反映させるにはページを再読み込みする必要があります。",
         // Machine-translated
         //ko: "정말 {handle} ({did})을 차단하시겠습니까? 반영하려면 페이지를 다시 로드해야 합니다.",
+        // by Tanza3D
+        // Dutch is NOT supported by Bluesky as of this addition
+        nl: "Weet je zeker dat je {handle} ({did}) wilt blokkeren? Je zult de pagina moeten herladen om de verandering te zien.",
         // Machine-translated
         //'pt-BR': "Tem certeza de deseja bloquear {handle} ({did})? Você precisará atualizar a página para refletir esta alteração.",
         // by Tanza3D
@@ -53,6 +57,36 @@
         //"zh-TW": "您確定要封鎖 {handle} ({did}) 嗎？您將需要刷新頁面以反映此更改。",
         // Machine-translated
         //"zh-HK": "你確定要阻止{handle}（{did}）嗎？ 您需要重新加載頁面才能使其生效。",
+    };
+
+    function getLocale() {
+        const langCheck(lang) {
+            const tokens = lang.split("-");
+            if (!(tokens[0] in HAS_REGION)) {
+                if (TL.hasOwnProperty(tokens[0]) {
+                    return tokens[0];
+                }
+            } else {
+                if (TL.hasOwnProperty(lang)) {
+                    return lang;
+                }
+            }
+            return "";
+        }
+        
+        const browserLangList = navigator.languages;
+        for (let lang of browserLangList) {
+            const check = langCheck(lang);
+            if (check !== "") {
+                return check;
+            }
+        }
+        const blueskyLang = document.getElementsByTagName("HTML")[0].lang;
+        const check = langCheck(blueskyLang);
+        if (check !== "") {
+            return check;
+        }
+        return "en";
     }
 
     (function() {
@@ -97,7 +131,7 @@
                         button.style.background = "#ff000022";
 
                         button.addEventListener("click", async () => {
-                            let locale = TL.hasOwnProperty(document.getElementsByTagName("HTML")[0].lang) ? document.getElementsByTagName("HTML")[0].lang : "en";
+                            let locale = getLocale();
                             if (window.confirm(TL[locale].replace("{handle}", handle).replace("{did}", did)) {
                                 await fetch(account.pdsUrl+"xrpc/com.atproto.repo.createRecord", {
                                     method: "POST",
