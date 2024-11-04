@@ -60,10 +60,10 @@
     };
 
     function getLocale() {
-        const langCheck(lang) {
+        const langCheck = (lang) => {
             const tokens = lang.split("-");
             if (!(tokens[0] in HAS_REGION)) {
-                if (TL.hasOwnProperty(tokens[0]) {
+                if (TL.hasOwnProperty(tokens[0])) {
                     return tokens[0];
                 }
             } else {
@@ -132,7 +132,7 @@
 
                         button.addEventListener("click", async () => {
                             let locale = getLocale();
-                            if (window.confirm(TL[locale].replace("{handle}", handle).replace("{did}", did)) {
+                            if (window.confirm(TL[locale].replace("{handle}", handle).replace("{did}", did))) {
                                 await fetch(account.pdsUrl+"xrpc/com.atproto.repo.createRecord", {
                                     method: "POST",
                                     headers: {
